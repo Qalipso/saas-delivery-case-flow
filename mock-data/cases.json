@@ -1,0 +1,73 @@
+[
+  {
+    "id": "case_acme",
+    "tenant_id": "tenant_helix",
+    "customer_company": "Acme Corp",
+    "contract_value_usd": 142000,
+    "target_go_live_date": "2026-06-15",
+    "current_stage": "Configuration",
+    "days_in_stage": 18,
+    "health_score": "red",
+    "health_reason": "Configuration SLA breached by 4 days; 1 open blocker on customer side (11 days old)",
+    "assigned_im": "dani@helix.co",
+    "created_at": "2026-04-04",
+    "open_blockers": 1
+  },
+  {
+    "id": "case_globex",
+    "tenant_id": "tenant_helix",
+    "customer_company": "Globex",
+    "contract_value_usd": 86000,
+    "target_go_live_date": "2026-07-01",
+    "current_stage": "UAT",
+    "days_in_stage": 6,
+    "health_score": "yellow",
+    "health_reason": "Customer non-response on UAT sign-off for 7 days",
+    "assigned_im": "dani@helix.co",
+    "created_at": "2026-04-15",
+    "open_blockers": 1
+  },
+  {
+    "id": "case_initech",
+    "tenant_id": "tenant_helix",
+    "customer_company": "Initech",
+    "contract_value_usd": 220000,
+    "target_go_live_date": "2026-06-30",
+    "current_stage": "Configuration",
+    "days_in_stage": 4,
+    "health_score": "green",
+    "health_reason": "On track",
+    "assigned_im": "jorge@helix.co",
+    "created_at": "2026-04-22",
+    "open_blockers": 0
+  },
+  {
+    "id": "case_wonka",
+    "tenant_id": "tenant_helix",
+    "customer_company": "Wonka Industries",
+    "contract_value_usd": 410000,
+    "target_go_live_date": "2026-08-10",
+    "current_stage": "Discovery",
+    "days_in_stage": 9,
+    "health_score": "green",
+    "health_reason": "On track; Discovery handoff form 5 of 7 complete",
+    "assigned_im": "jorge@helix.co",
+    "created_at": "2026-05-01",
+    "open_blockers": 0
+  },
+  {
+    "id": "case_soylent",
+    "tenant_id": "tenant_helix",
+    "customer_company": "Soylent Co",
+    "contract_value_usd": 64000,
+    "target_go_live_date": "2026-05-20",
+    "actual_go_live_date": null,
+    "current_stage": "Hypercare",
+    "days_in_stage": 3,
+    "health_score": "yellow",
+    "health_reason": "Customer reported login bug on day 1 of Hypercare; blocker open with engineering",
+    "assigned_im": "dani@helix.co",
+    "created_at": "2026-03-10",
+    "open_blockers": 1
+  }
+]

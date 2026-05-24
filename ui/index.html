@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Case Flow — Portfolio Mock</title>
+  <style>
+    :root {
+      --bg: #f6f7fa;
+      --surface: #ffffff;
+      --border: #e3e6ee;
+      --text: #1a1c22;
+      --muted: #6b7280;
+      --accent: #4f46e5;
+      --green: #16a34a;
+      --yellow: #ca8a04;
+      --red: #dc2626;
+    }
+    * { box-sizing: border-box }
+    body {
+      margin: 0; font-family: -apple-system, "Inter", system-ui, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5;
+    }
+    header {
+      padding: 16px 32px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--surface);
+    }
+    h1 { font-size: 16px; font-weight: 600; margin: 0; }
+    .pill { font-size: 11px; padding: 2px 8px; border-radius: 10px; background: #eef2ff; color: var(--accent); }
+    main { padding: 28px 32px; }
+    h2 { font-size: 22px; margin: 0 0 6px; }
+    .sub { color: var(--muted); margin-bottom: 24px; font-size: 14px; }
+    .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+    .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; }
+    .kpi .label { color: var(--muted); font-size: 12px; }
+    .kpi .value { font-size: 22px; font-weight: 600; margin-top: 4px; }
+    table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; font-size: 14px; }
+    th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+    th { color: var(--muted); font-weight: 500; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; background: #fafbff; }
+    tr:last-child td { border-bottom: none }
+    .dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:8px; vertical-align:middle; }
+    .dot-green { background: var(--green); }
+    .dot-yellow { background: var(--yellow); }
+    .dot-red { background: var(--red); }
+    .badge { display:inline-block; padding:2px 8px; border-radius:6px; font-size:11px; font-weight:500; }
+    .b-stage { background: #eef2ff; color: var(--accent); }
+    .reason { color: var(--muted); font-size: 12px; margin-top: 4px; }
+    .right { text-align: right; }
+    .mono { font-family: ui-monospace, "JetBrains Mono", Menlo, monospace; font-size: 12px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Helix Delivery — Portfolio <span class="pill">VP view</span></h1>
+    <span class="mono">mateo@helix.co</span>
+  </header>
+  <main>
+    <h2>Active cases — Week 20</h2>
+    <p class="sub">5 active · 1 red · 2 yellow · 2 green · median time-to-live (last 90d): 58 days</p>
+
+    <div class="kpis">
+      <div class="kpi"><div class="label">Active cases</div><div class="value">5</div></div>
+      <div class="kpi"><div class="label">Contract value at risk</div><div class="value">$206k</div></div>
+      <div class="kpi"><div class="label">SLA-breached stages</div><div class="value">1</div></div>
+      <div class="kpi"><div class="label">Blockers > 7 days old</div><div class="value">2</div></div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Customer</th>
+          <th>IM</th>
+          <th>Stage</th>
+          <th>Days in stage</th>
+          <th>Target go-live</th>
+          <th class="right">Contract</th>
+          <th>Health</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Acme Corp</strong></td>
+          <td>dani@helix.co</td>
+          <td><span class="badge b-stage">Configuration</span></td>
+          <td>18 d</td>
+          <td>2026-06-15</td>
+          <td class="right">$142k</td>
+          <td>
+            <span class="dot dot-red"></span>Red
+            <div class="reason">Configuration SLA breached by 4 days · 1 customer-side blocker (11d)</div>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Globex</strong></td>
+          <td>dani@helix.co</td>
+          <td><span class="badge b-stage">UAT</span></td>
+          <td>6 d</td>
+          <td>2026-07-01</td>
+          <td class="right">$86k</td>
+          <td>
+            <span class="dot dot-yellow"></span>Yellow
+            <div class="reason">Customer non-response on UAT sign-off (7 days)</div>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Soylent Co</strong></td>
+          <td>dani@helix.co</td>
+          <td><span class="badge b-stage">Hypercare</span></td>
+          <td>3 d</td>
+          <td>2026-05-20</td>
+          <td class="right">$64k</td>
+          <td>
+            <span class="dot dot-yellow"></span>Yellow
+            <div class="reason">SSO bug reported day 1 · engineering ticket HLX-3421</div>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Initech</strong></td>
+          <td>jorge@helix.co</td>
+          <td><span class="badge b-stage">Configuration</span></td>
+          <td>4 d</td>
+          <td>2026-06-30</td>
+          <td class="right">$220k</td>
+          <td>
+            <span class="dot dot-green"></span>Green
+            <div class="reason">On track</div>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Wonka Industries</strong></td>
+          <td>jorge@helix.co</td>
+          <td><span class="badge b-stage">Discovery</span></td>
+          <td>9 d</td>
+          <td>2026-08-10</td>
+          <td class="right">$410k</td>
+          <td>
+            <span class="dot dot-green"></span>Green
+            <div class="reason">Discovery handoff 5 of 7 fields complete</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>
