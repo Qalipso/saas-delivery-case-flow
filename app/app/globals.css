@@ -22,8 +22,6 @@ body {
 
 body {
   min-height: 100%;
-  display: flex;
-  flex-direction: column;
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
@@ -47,3 +45,75 @@ a {
     color-scheme: dark;
   }
 }
+
+/* Markdown body styling for /docs */
+.md-body {
+  font-size: 14px;
+  line-height: 1.65;
+  color: #c9d1d9;
+}
+.md-body h1, .md-body h2, .md-body h3, .md-body h4 {
+  color: #e6edf3;
+  margin: 22px 0 10px;
+  font-weight: 600;
+}
+.md-body h1 { font-size: 20px; }
+.md-body h2 { font-size: 17px; padding-bottom: 6px; border-bottom: 1px solid #21262d; }
+.md-body h3 { font-size: 15px; }
+.md-body h4 { font-size: 13px; color: #8b949e; }
+.md-body p { margin: 8px 0; }
+.md-body ul, .md-body ol { margin: 8px 0; padding-left: 24px; }
+.md-body li { margin: 4px 0; }
+.md-body code {
+  background: #161b22;
+  border: 1px solid #21262d;
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: #e6edf3;
+}
+.md-body pre {
+  background: #161b22;
+  border: 1px solid #21262d;
+  padding: 12px 14px;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 12px 0;
+}
+.md-body pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: 12px;
+  color: #c9d1d9;
+}
+.md-body pre.mermaid {
+  background: #0d1117;
+  border: 1px solid #21262d;
+  text-align: center;
+  padding: 16px;
+}
+.md-body table {
+  border-collapse: collapse;
+  margin: 12px 0;
+  font-size: 12px;
+  width: 100%;
+}
+.md-body th, .md-body td {
+  border: 1px solid #21262d;
+  padding: 6px 10px;
+  text-align: left;
+}
+.md-body th { background: #161b22; color: #e6edf3; font-weight: 600; }
+.md-body blockquote {
+  border-left: 3px solid #1f6feb;
+  padding: 4px 12px;
+  margin: 12px 0;
+  background: #0d1117;
+  color: #8b949e;
+}
+.md-body a { color: #58a6ff; text-decoration: none; }
+.md-body a:hover { text-decoration: underline; }
+.md-body hr { border: none; border-top: 1px solid #21262d; margin: 20px 0; }
+.md-body strong { color: #e6edf3; }
