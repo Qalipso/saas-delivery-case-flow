@@ -15,16 +15,20 @@ const DOCS: { title: string; file: string; desc: string }[] = [
   { title: "Acceptance Criteria", file: "acceptance-criteria.md", desc: "Done-when checks per surface" },
 ];
 
-// custom marked renderer — map ```mermaid blocks to <pre class="mermaid"> for client render
-const renderer = new marked.Renderer();
-const origCode = renderer.code.bind(renderer);
-renderer.code = function ({ text, lang }: { text: string; lang?: string }) {
-  if (lang === "mermaid") {
-    return `<pre class="mermaid">${text}</pre>`;
-  }
-  return origCode({ text, lang, escaped: false });
-};
-marked.use({ renderer, gfm: true, breaks: false });
+// custom marked extension — map ```mermaid blocks to <pre class="mermaid"> for client render
+marked.use({
+  gfm: true,
+  breaks: false,
+  renderer: {
+    code({ text, lang }) {
+      if (lang === "mermaid") {
+        return `<pre class="mermaid">${text}</pre>`;
+      }
+      // delegate to default by returning false
+      return false;
+    },
+  },
+});
 
 async function loadDoc(file: string): Promise<string> {
   try {
