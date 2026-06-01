@@ -9,6 +9,8 @@
  * Confidential gaps are marked {/* TODO: real metric *\/} at the usage site.
  */
 
+import { asset } from "@/lib/base";
+
 export type Metric = {
   value: string;
   label: string;
@@ -564,5 +566,5 @@ export const onboardingDemo = {
   title: "Interactive onboarding hub",
   blurb:
     "An AI-built, icon-based guide so new joiners self-serve their first weeks: start-here, knowledge base, responsibilities matrix, stack, environments, 30·60·90 ramp, rituals, team, and glossary. Embedded live below.",
-  src: "/onboarding-hub.html",
+  src: asset("/onboarding-hub.html"),
 };

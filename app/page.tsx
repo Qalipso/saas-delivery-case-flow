@@ -1,6 +1,6 @@
-import { redirect } from "next/navigation";
+import BookApp from "@/components/BookApp";
 
-// The case study is the product; send the root straight to it.
+// The case study is the product; render it at the root of this (base-pathed) deploy.
 export default function Home() {
-  redirect("/case-studies/underwriting-portal");
+  return <BookApp />;
 }

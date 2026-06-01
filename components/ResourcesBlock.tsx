@@ -1,4 +1,5 @@
 import { FileText, FileCode, Network } from "lucide-react";
+import { asset } from "@/lib/base";
 
 type Resource = {
   href: string;
@@ -9,35 +10,35 @@ type Resource = {
   external?: boolean;
 };
 
-// Structurizr local renders the C4 model from workspace.dsl when running.
-const STRUCTURIZR_LOCAL = "http://localhost:4040";
+// Public static C4 site (generated from workspace.dsl via structurizr-site-generatr).
+const STRUCTURIZR_SITE = "https://shatalov.dev/c4/";
 
 const resources: Resource[] = [
   {
-    href: "/resources/underwriting-case-deck.pdf",
+    href: asset("/resources/underwriting-case-deck.pdf"),
     label: "Executive deck (PDF)",
     meta: "12 slides",
     Icon: FileText,
     download: true,
   },
   {
-    href: "/resources/workspace.dsl",
+    href: asset("/resources/workspace.dsl"),
     label: "C4 model (Structurizr DSL)",
     meta: "architecture as code",
     Icon: FileCode,
     download: true,
   },
   {
-    href: "/resources/architecture-c4.md",
+    href: asset("/resources/architecture-c4.md"),
     label: "Architecture appendix (Markdown)",
     meta: "L1 / L2 / L3 + notes",
     Icon: FileText,
     download: true,
   },
   {
-    href: STRUCTURIZR_LOCAL,
+    href: STRUCTURIZR_SITE,
     label: "Open C4 in Structurizr",
-    meta: "local renderer · localhost:4040",
+    meta: "interactive site · shatalov.dev/c4",
     Icon: Network,
     external: true,
   },
