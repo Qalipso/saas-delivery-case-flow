@@ -1,0 +1,599 @@
+{
+  "configuration" : { },
+  "description" : "C4 model — Wonderland Inc. (anonymized). Risk submission to bound policy; documents, billing, reporting; isolated security.",
+  "documentation" : { },
+  "id" : 1,
+  "lastModifiedDate" : "2026-06-01T01:31:37Z",
+  "model" : {
+    "people" : [ {
+      "description" : "Underwriter / broker. Submits and views own risk records.",
+      "id" : "1",
+      "name" : "Regular user",
+      "properties" : {
+        "structurizr.dsl.identifier" : "ru"
+      },
+      "relationships" : [ {
+        "description" : "Uses",
+        "destinationId" : "7",
+        "id" : "19",
+        "sourceId" : "1",
+        "tags" : "Relationship",
+        "technology" : "HTTPS"
+      }, {
+        "description" : "Uses",
+        "destinationId" : "6",
+        "id" : "20",
+        "linkedRelationshipId" : "19",
+        "sourceId" : "1",
+        "technology" : "HTTPS"
+      } ],
+      "tags" : "Element,Person"
+    }, {
+      "description" : "Leads, BA. Approves referrals and high-value risks; configures workflow.",
+      "id" : "2",
+      "name" : "Portal admin",
+      "properties" : {
+        "structurizr.dsl.identifier" : "pa"
+      },
+      "relationships" : [ {
+        "description" : "Uses",
+        "destinationId" : "7",
+        "id" : "21",
+        "sourceId" : "2",
+        "tags" : "Relationship",
+        "technology" : "HTTPS"
+      }, {
+        "description" : "Uses",
+        "destinationId" : "6",
+        "id" : "22",
+        "linkedRelationshipId" : "21",
+        "sourceId" : "2",
+        "technology" : "HTTPS"
+      } ],
+      "tags" : "Element,Person"
+    }, {
+      "description" : "PM, Senior DevOps, Lead. Cross-portal config, security, environments.",
+      "id" : "3",
+      "name" : "Super admin",
+      "properties" : {
+        "structurizr.dsl.identifier" : "sa"
+      },
+      "relationships" : [ {
+        "description" : "Manages roles & env security",
+        "destinationId" : "13",
+        "id" : "23",
+        "sourceId" : "3",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Manages roles & env security",
+        "destinationId" : "6",
+        "id" : "24",
+        "linkedRelationshipId" : "23",
+        "sourceId" : "3"
+      }, {
+        "description" : "Manage roles & env security",
+        "destinationId" : "15",
+        "id" : "37",
+        "sourceId" : "3",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Person"
+    } ],
+    "softwareSystems" : [ {
+      "description" : "Settlement and invoicing.",
+      "documentation" : { },
+      "id" : "4",
+      "name" : "Bank / billing provider",
+      "properties" : {
+        "structurizr.dsl.identifier" : "bank"
+      },
+      "tags" : "Element,Software System,External"
+    }, {
+      "description" : "Monolith being replaced; one-way migration source.",
+      "documentation" : { },
+      "id" : "5",
+      "name" : "Legacy system",
+      "properties" : {
+        "structurizr.dsl.identifier" : "legacy"
+      },
+      "relationships" : [ {
+        "description" : "One-way data migration",
+        "destinationId" : "8",
+        "id" : "34",
+        "sourceId" : "5",
+        "tags" : "Relationship"
+      }, {
+        "description" : "One-way data migration",
+        "destinationId" : "6",
+        "id" : "35",
+        "linkedRelationshipId" : "34",
+        "sourceId" : "5"
+      } ],
+      "tags" : "Element,Software System,External"
+    }, {
+      "containers" : [ {
+        "description" : "Portal UI, risk submission, dashboards.",
+        "documentation" : { },
+        "id" : "7",
+        "name" : "Web SPA",
+        "properties" : {
+          "structurizr.dsl.identifier" : "spa"
+        },
+        "relationships" : [ {
+          "description" : "Calls",
+          "destinationId" : "8",
+          "id" : "25",
+          "sourceId" : "7",
+          "tags" : "Relationship",
+          "technology" : "JSON / HTTPS"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "TypeScript"
+      }, {
+        "description" : "Risk workflow, pricing, decisions. The hub.",
+        "documentation" : { },
+        "id" : "8",
+        "name" : "Application / API service",
+        "properties" : {
+          "structurizr.dsl.identifier" : "api"
+        },
+        "relationships" : [ {
+          "description" : "Authorization check (every request)",
+          "destinationId" : "13",
+          "id" : "26",
+          "sourceId" : "8",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Reads / writes risk records",
+          "destinationId" : "12",
+          "id" : "27",
+          "sourceId" : "8",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Generates documents",
+          "destinationId" : "9",
+          "id" : "28",
+          "sourceId" : "8",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Triggers billing",
+          "destinationId" : "10",
+          "id" : "29",
+          "sourceId" : "8",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Builds reports",
+          "destinationId" : "11",
+          "id" : "30",
+          "sourceId" : "8",
+          "tags" : "Relationship"
+        }, {
+          "description" : "authz check (every request)",
+          "destinationId" : "14",
+          "id" : "36",
+          "sourceId" : "8",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "C# / .NET"
+      }, {
+        "description" : "Policy and print documents.",
+        "documentation" : { },
+        "id" : "9",
+        "name" : "Document generation",
+        "properties" : {
+          "structurizr.dsl.identifier" : "doc"
+        },
+        "tags" : "Element,Container",
+        "technology" : ".NET"
+      }, {
+        "description" : "Bank billing and invoicing.",
+        "documentation" : { },
+        "id" : "10",
+        "name" : "Billing integration",
+        "properties" : {
+          "structurizr.dsl.identifier" : "bill"
+        },
+        "relationships" : [ {
+          "description" : "Settlement / invoicing",
+          "destinationId" : "4",
+          "id" : "32",
+          "sourceId" : "10",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : ".NET"
+      }, {
+        "description" : "Reports and analytics export.",
+        "documentation" : { },
+        "id" : "11",
+        "name" : "Reporting",
+        "properties" : {
+          "structurizr.dsl.identifier" : "rep"
+        },
+        "tags" : "Element,Container",
+        "technology" : ".NET"
+      }, {
+        "description" : "Risk records, documents, secure operational data.",
+        "documentation" : { },
+        "id" : "12",
+        "name" : "Data store",
+        "properties" : {
+          "structurizr.dsl.identifier" : "db"
+        },
+        "tags" : "Element,Container,Database",
+        "technology" : "Azure-managed SQL / storage"
+      }, {
+        "components" : [ {
+          "description" : "Per-request permission checks. Single entry point; services never evaluate access themselves.",
+          "documentation" : { },
+          "id" : "14",
+          "name" : "Authorization API",
+          "properties" : {
+            "structurizr.dsl.identifier" : "authz"
+          },
+          "relationships" : [ {
+            "description" : "Resolve scope",
+            "destinationId" : "16",
+            "id" : "38",
+            "sourceId" : "14",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Read permissions",
+            "destinationId" : "18",
+            "id" : "39",
+            "sourceId" : "14",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Log decision",
+            "destinationId" : "17",
+            "id" : "42",
+            "sourceId" : "14",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : ".NET"
+        }, {
+          "description" : "Roles, permission sets, approval thresholds. Only writer.",
+          "documentation" : { },
+          "id" : "15",
+          "name" : "Role & permission manager",
+          "properties" : {
+            "structurizr.dsl.identifier" : "role"
+          },
+          "relationships" : [ {
+            "description" : "Read / write",
+            "destinationId" : "18",
+            "id" : "40",
+            "sourceId" : "15",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Log change",
+            "destinationId" : "17",
+            "id" : "43",
+            "sourceId" : "15",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : ".NET"
+        }, {
+          "description" : "Per-environment security settings; enables multi-env governance.",
+          "documentation" : { },
+          "id" : "16",
+          "name" : "Environment config resolver",
+          "properties" : {
+            "structurizr.dsl.identifier" : "envr"
+          },
+          "relationships" : [ {
+            "description" : "Read settings",
+            "destinationId" : "18",
+            "id" : "41",
+            "sourceId" : "16",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : ".NET"
+        }, {
+          "description" : "Access and change trail.",
+          "documentation" : { },
+          "id" : "17",
+          "name" : "Audit logger",
+          "properties" : {
+            "structurizr.dsl.identifier" : "audit"
+          },
+          "tags" : "Element,Component",
+          "technology" : ".NET"
+        }, {
+          "description" : "Isolated store: roles, permissions, env config. Separate from operational data.",
+          "documentation" : { },
+          "id" : "18",
+          "name" : "Security schema",
+          "properties" : {
+            "structurizr.dsl.identifier" : "sstore"
+          },
+          "tags" : "Element,Component,Database",
+          "technology" : "isolated store"
+        } ],
+        "description" : "Isolated, multi-environment. Roles, permissions, security settings.",
+        "documentation" : { },
+        "id" : "13",
+        "name" : "Admin & Security service",
+        "properties" : {
+          "structurizr.dsl.identifier" : "sec"
+        },
+        "relationships" : [ {
+          "description" : "Owns isolated security schema",
+          "destinationId" : "12",
+          "id" : "31",
+          "sourceId" : "13",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container,Security",
+        "technology" : ".NET"
+      } ],
+      "description" : "B2B underwriting portal. Runs on Kubernetes.",
+      "documentation" : { },
+      "id" : "6",
+      "name" : "Underwriting Portal Platform",
+      "properties" : {
+        "structurizr.dsl.identifier" : "platform"
+      },
+      "relationships" : [ {
+        "description" : "Settlement / invoicing",
+        "destinationId" : "4",
+        "id" : "33",
+        "linkedRelationshipId" : "32",
+        "sourceId" : "6"
+      } ],
+      "tags" : "Element,Software System"
+    } ]
+  },
+  "name" : "Underwriting Portal Platform",
+  "properties" : {
+    "structurizr.inspection.error" : "23",
+    "structurizr.dsl" : "d29ya3NwYWNlICJVbmRlcndyaXRpbmcgUG9ydGFsIFBsYXRmb3JtIiAiQzQgbW9kZWwg4oCUIFdvbmRlcmxhbmQgSW5jLiAoYW5vbnltaXplZCkuIFJpc2sgc3VibWlzc2lvbiB0byBib3VuZCBwb2xpY3k7IGRvY3VtZW50cywgYmlsbGluZywgcmVwb3J0aW5nOyBpc29sYXRlZCBzZWN1cml0eS4iIHsKCiAgbW9kZWwgewogICAgcnUgPSBwZXJzb24gIlJlZ3VsYXIgdXNlciIgIlVuZGVyd3JpdGVyIC8gYnJva2VyLiBTdWJtaXRzIGFuZCB2aWV3cyBvd24gcmlzayByZWNvcmRzLiIKICAgIHBhID0gcGVyc29uICJQb3J0YWwgYWRtaW4iICJMZWFkcywgQkEuIEFwcHJvdmVzIHJlZmVycmFscyBhbmQgaGlnaC12YWx1ZSByaXNrczsgY29uZmlndXJlcyB3b3JrZmxvdy4iCiAgICBzYSA9IHBlcnNvbiAiU3VwZXIgYWRtaW4iICJQTSwgU2VuaW9yIERldk9wcywgTGVhZC4gQ3Jvc3MtcG9ydGFsIGNvbmZpZywgc2VjdXJpdHksIGVudmlyb25tZW50cy4iCgogICAgYmFuayA9IHNvZnR3YXJlU3lzdGVtICJCYW5rIC8gYmlsbGluZyBwcm92aWRlciIgIlNldHRsZW1lbnQgYW5kIGludm9pY2luZy4iICJFeHRlcm5hbCIKICAgIGxlZ2FjeSA9IHNvZnR3YXJlU3lzdGVtICJMZWdhY3kgc3lzdGVtIiAiTW9ub2xpdGggYmVpbmcgcmVwbGFjZWQ7IG9uZS13YXkgbWlncmF0aW9uIHNvdXJjZS4iICJFeHRlcm5hbCIKCiAgICBwbGF0Zm9ybSA9IHNvZnR3YXJlU3lzdGVtICJVbmRlcndyaXRpbmcgUG9ydGFsIFBsYXRmb3JtIiAiQjJCIHVuZGVyd3JpdGluZyBwb3J0YWwuIFJ1bnMgb24gS3ViZXJuZXRlcy4iIHsKICAgICAgc3BhID0gY29udGFpbmVyICJXZWIgU1BBIiAiUG9ydGFsIFVJLCByaXNrIHN1Ym1pc3Npb24sIGRhc2hib2FyZHMuIiAiVHlwZVNjcmlwdCIKICAgICAgYXBpID0gY29udGFpbmVyICJBcHBsaWNhdGlvbiAvIEFQSSBzZXJ2aWNlIiAiUmlzayB3b3JrZmxvdywgcHJpY2luZywgZGVjaXNpb25zLiBUaGUgaHViLiIgIkMjIC8gLk5FVCIKICAgICAgZG9jID0gY29udGFpbmVyICJEb2N1bWVudCBnZW5lcmF0aW9uIiAiUG9saWN5IGFuZCBwcmludCBkb2N1bWVudHMuIiAiLk5FVCIKICAgICAgYmlsbCA9IGNvbnRhaW5lciAiQmlsbGluZyBpbnRlZ3JhdGlvbiIgIkJhbmsgYmlsbGluZyBhbmQgaW52b2ljaW5nLiIgIi5ORVQiCiAgICAgIHJlcCA9IGNvbnRhaW5lciAiUmVwb3J0aW5nIiAiUmVwb3J0cyBhbmQgYW5hbHl0aWNzIGV4cG9ydC4iICIuTkVUIgogICAgICBkYiA9IGNvbnRhaW5lciAiRGF0YSBzdG9yZSIgIlJpc2sgcmVjb3JkcywgZG9jdW1lbnRzLCBzZWN1cmUgb3BlcmF0aW9uYWwgZGF0YS4iICJBenVyZS1tYW5hZ2VkIFNRTCAvIHN0b3JhZ2UiICJEYXRhYmFzZSIKCiAgICAgIHNlYyA9IGNvbnRhaW5lciAiQWRtaW4gJiBTZWN1cml0eSBzZXJ2aWNlIiAiSXNvbGF0ZWQsIG11bHRpLWVudmlyb25tZW50LiBSb2xlcywgcGVybWlzc2lvbnMsIHNlY3VyaXR5IHNldHRpbmdzLiIgIi5ORVQiICJTZWN1cml0eSIgewogICAgICAgIGF1dGh6ID0gY29tcG9uZW50ICJBdXRob3JpemF0aW9uIEFQSSIgIlBlci1yZXF1ZXN0IHBlcm1pc3Npb24gY2hlY2tzLiBTaW5nbGUgZW50cnkgcG9pbnQ7IHNlcnZpY2VzIG5ldmVyIGV2YWx1YXRlIGFjY2VzcyB0aGVtc2VsdmVzLiIgIi5ORVQiCiAgICAgICAgcm9sZSA9IGNvbXBvbmVudCAiUm9sZSAmIHBlcm1pc3Npb24gbWFuYWdlciIgIlJvbGVzLCBwZXJtaXNzaW9uIHNldHMsIGFwcHJvdmFsIHRocmVzaG9sZHMuIE9ubHkgd3JpdGVyLiIgIi5ORVQiCiAgICAgICAgZW52ciA9IGNvbXBvbmVudCAiRW52aXJvbm1lbnQgY29uZmlnIHJlc29sdmVyIiAiUGVyLWVudmlyb25tZW50IHNlY3VyaXR5IHNldHRpbmdzOyBlbmFibGVzIG11bHRpLWVudiBnb3Zlcm5hbmNlLiIgIi5ORVQiCiAgICAgICAgYXVkaXQgPSBjb21wb25lbnQgIkF1ZGl0IGxvZ2dlciIgIkFjY2VzcyBhbmQgY2hhbmdlIHRyYWlsLiIgIi5ORVQiCiAgICAgICAgc3N0b3JlID0gY29tcG9uZW50ICJTZWN1cml0eSBzY2hlbWEiICJJc29sYXRlZCBzdG9yZTogcm9sZXMsIHBlcm1pc3Npb25zLCBlbnYgY29uZmlnLiBTZXBhcmF0ZSBmcm9tIG9wZXJhdGlvbmFsIGRhdGEuIiAiaXNvbGF0ZWQgc3RvcmUiICJEYXRhYmFzZSIKICAgICAgfQogICAgfQoKICAgICMgY29udGV4dCAvIGNvbnRhaW5lciByZWxhdGlvbnNoaXBzCiAgICBydSAtPiBzcGEgIlVzZXMiICJIVFRQUyIKICAgIHBhIC0+IHNwYSAiVXNlcyIgIkhUVFBTIgogICAgc2EgLT4gc2VjICJNYW5hZ2VzIHJvbGVzICYgZW52IHNlY3VyaXR5IgogICAgc3BhIC0+IGFwaSAiQ2FsbHMiICJKU09OIC8gSFRUUFMiCiAgICBhcGkgLT4gc2VjICJBdXRob3JpemF0aW9uIGNoZWNrIChldmVyeSByZXF1ZXN0KSIKICAgIGFwaSAtPiBkYiAiUmVhZHMgLyB3cml0ZXMgcmlzayByZWNvcmRzIgogICAgYXBpIC0+IGRvYyAiR2VuZXJhdGVzIGRvY3VtZW50cyIKICAgIGFwaSAtPiBiaWxsICJUcmlnZ2VycyBiaWxsaW5nIgogICAgYXBpIC0+IHJlcCAiQnVpbGRzIHJlcG9ydHMiCiAgICBzZWMgLT4gZGIgIk93bnMgaXNvbGF0ZWQgc2VjdXJpdHkgc2NoZW1hIgogICAgYmlsbCAtPiBiYW5rICJTZXR0bGVtZW50IC8gaW52b2ljaW5nIgogICAgbGVnYWN5IC0+IGFwaSAiT25lLXdheSBkYXRhIG1pZ3JhdGlvbiIKCiAgICAjIGNvbXBvbmVudCByZWxhdGlvbnNoaXBzIChpbnNpZGUgQWRtaW4gJiBTZWN1cml0eSBzZXJ2aWNlKQogICAgYXBpIC0+IGF1dGh6ICJhdXRoeiBjaGVjayAoZXZlcnkgcmVxdWVzdCkiCiAgICBzYSAtPiByb2xlICJNYW5hZ2Ugcm9sZXMgJiBlbnYgc2VjdXJpdHkiCiAgICBhdXRoeiAtPiBlbnZyICJSZXNvbHZlIHNjb3BlIgogICAgYXV0aHogLT4gc3N0b3JlICJSZWFkIHBlcm1pc3Npb25zIgogICAgcm9sZSAtPiBzc3RvcmUgIlJlYWQgLyB3cml0ZSIKICAgIGVudnIgLT4gc3N0b3JlICJSZWFkIHNldHRpbmdzIgogICAgYXV0aHogLT4gYXVkaXQgIkxvZyBkZWNpc2lvbiIKICAgIHJvbGUgLT4gYXVkaXQgIkxvZyBjaGFuZ2UiCiAgfQoKICB2aWV3cyB7CiAgICBzeXN0ZW1Db250ZXh0IHBsYXRmb3JtICJMMV9Db250ZXh0IiAiTGV2ZWwgMSDigJQgU3lzdGVtIENvbnRleHQiIHsKICAgICAgaW5jbHVkZSAqCiAgICAgIGF1dG9sYXlvdXQgbHIKICAgIH0KCiAgICBjb250YWluZXIgcGxhdGZvcm0gIkwyX0NvbnRhaW5lcnMiICJMZXZlbCAyIOKAlCBDb250YWluZXJzIChLdWJlcm5ldGVzKSIgewogICAgICBpbmNsdWRlICoKICAgICAgYXV0b2xheW91dCBscgogICAgfQoKICAgIGNvbXBvbmVudCBzZWMgIkwzX1NlY3VyaXR5IiAiTGV2ZWwgMyDigJQgQWRtaW4gJiBTZWN1cml0eSBzZXJ2aWNlIGNvbXBvbmVudHMiIHsKICAgICAgaW5jbHVkZSAqCiAgICAgIGF1dG9sYXlvdXQgbHIKICAgIH0KCiAgICBzdHlsZXMgewogICAgICBlbGVtZW50ICJQZXJzb24iIHsKICAgICAgICBiYWNrZ3JvdW5kICIjMWY2ZmViIgogICAgICAgIGNvbG9yICIjZmZmZmZmIgogICAgICAgIHNoYXBlIHBlcnNvbgogICAgICB9CiAgICAgIGVsZW1lbnQgIlNvZnR3YXJlIFN5c3RlbSIgewogICAgICAgIGJhY2tncm91bmQgIiMxNjM2NWMiCiAgICAgICAgY29sb3IgIiNmZmZmZmYiCiAgICAgIH0KICAgICAgZWxlbWVudCAiRXh0ZXJuYWwiIHsKICAgICAgICBiYWNrZ3JvdW5kICIjNmU3NzgxIgogICAgICAgIGNvbG9yICIjZmZmZmZmIgogICAgICB9CiAgICAgIGVsZW1lbnQgIkNvbnRhaW5lciIgewogICAgICAgIGJhY2tncm91bmQgIiMxZjZmZWIiCiAgICAgICAgY29sb3IgIiNmZmZmZmYiCiAgICAgIH0KICAgICAgZWxlbWVudCAiU2VjdXJpdHkiIHsKICAgICAgICBiYWNrZ3JvdW5kICIjZDEyNDJmIgogICAgICAgIGNvbG9yICIjZmZmZmZmIgogICAgICB9CiAgICAgIGVsZW1lbnQgIkRhdGFiYXNlIiB7CiAgICAgICAgc2hhcGUgY3lsaW5kZXIKICAgICAgICBiYWNrZ3JvdW5kICIjYjA4ODAwIgogICAgICAgIGNvbG9yICIjZmZmZmZmIgogICAgICB9CiAgICAgIGVsZW1lbnQgIkNvbXBvbmVudCIgewogICAgICAgIGJhY2tncm91bmQgIiMzYjgyZjYiCiAgICAgICAgY29sb3IgIiNmZmZmZmYiCiAgICAgIH0KICAgIH0KCiAgICB0aGVtZSBkZWZhdWx0CiAgfQp9",
+    "structurizr.inspection.info" : "0",
+    "structurizr.inspection.ignore" : "0",
+    "structurizr.inspection.warning" : "0"
+  },
+  "views" : {
+    "componentViews" : [ {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "containerId" : "13",
+      "description" : "Level 3 — Admin & Security service components",
+      "elements" : [ {
+        "id" : "3",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "8",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "14",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "15",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "16",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "17",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "18",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "externalContainerBoundariesVisible" : false,
+      "key" : "L3_Security",
+      "name" : "Component View: Underwriting Portal Platform - Admin & Security service",
+      "order" : 3,
+      "relationships" : [ {
+        "id" : "36"
+      }, {
+        "id" : "37"
+      }, {
+        "id" : "38"
+      }, {
+        "id" : "39"
+      }, {
+        "id" : "40"
+      }, {
+        "id" : "41"
+      }, {
+        "id" : "42"
+      }, {
+        "id" : "43"
+      } ]
+    } ],
+    "configuration" : {
+      "styles" : {
+        "elements" : [ {
+          "background" : "#3b82f6",
+          "color" : "#ffffff",
+          "tag" : "Component"
+        }, {
+          "background" : "#1f6feb",
+          "color" : "#ffffff",
+          "tag" : "Container"
+        }, {
+          "background" : "#b08800",
+          "color" : "#ffffff",
+          "shape" : "Cylinder",
+          "tag" : "Database"
+        }, {
+          "background" : "#6e7781",
+          "color" : "#ffffff",
+          "tag" : "External"
+        }, {
+          "background" : "#1f6feb",
+          "color" : "#ffffff",
+          "shape" : "Person",
+          "tag" : "Person"
+        }, {
+          "background" : "#d1242f",
+          "color" : "#ffffff",
+          "tag" : "Security"
+        }, {
+          "background" : "#16365c",
+          "color" : "#ffffff",
+          "tag" : "Software System"
+        } ]
+      },
+      "terminology" : { },
+      "themes" : [ "https://static.structurizr.com/themes/default/theme.json" ]
+    },
+    "containerViews" : [ {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "description" : "Level 2 — Containers (Kubernetes)",
+      "elements" : [ {
+        "id" : "1",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "2",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "3",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "4",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "5",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "7",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "8",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "9",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "10",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "11",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "12",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "13",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "externalSoftwareSystemBoundariesVisible" : false,
+      "key" : "L2_Containers",
+      "name" : "Container View: Underwriting Portal Platform",
+      "order" : 2,
+      "relationships" : [ {
+        "id" : "19"
+      }, {
+        "id" : "21"
+      }, {
+        "id" : "23"
+      }, {
+        "id" : "25"
+      }, {
+        "id" : "26"
+      }, {
+        "id" : "27"
+      }, {
+        "id" : "28"
+      }, {
+        "id" : "29"
+      }, {
+        "id" : "30"
+      }, {
+        "id" : "31"
+      }, {
+        "id" : "32"
+      }, {
+        "id" : "34"
+      } ],
+      "softwareSystemId" : "6"
+    } ],
+    "systemContextViews" : [ {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "description" : "Level 1 — System Context",
+      "elements" : [ {
+        "id" : "1",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "2",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "3",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "4",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "5",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "6",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "enterpriseBoundaryVisible" : true,
+      "key" : "L1_Context",
+      "name" : "System Context View: Underwriting Portal Platform",
+      "order" : 1,
+      "relationships" : [ {
+        "id" : "20"
+      }, {
+        "id" : "22"
+      }, {
+        "id" : "24"
+      }, {
+        "id" : "33"
+      }, {
+        "id" : "35"
+      } ],
+      "softwareSystemId" : "6"
+    } ]
+  }
+}
