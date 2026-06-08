@@ -7,6 +7,8 @@
 
 <sub>Anonymized as *"Wonderland Inc."* Architecture is described as *influenced / advocated*; delivery and configuration as *owned*; people work as *coordinated*. Quantitative figures are directional.</sub>
 
+![Case study cover](docs/screens/01-cover.png)
+
 ---
 
 ## 1 · The experience
@@ -16,6 +18,17 @@
 - **Grew and led the config team 3 → 10+**, coordinated **~30** cross-functional contributors (QA, BA, dev, DevOps, PM, client).
 - **Interviewed 20+** candidates across multiple nationalities; owned hiring, onboarding, sprint planning, estimates, and delivery flow.
 - **The decision that defined it:** a late request for **three** portals scoped at **~6 months**. Two were structurally the same product — restructured as a **parent + one independent portal**, then grew the third on the parent's base. **Shipped in ~4 months instead of ~6.** A delivery call, not a framework.
+
+```mermaid
+flowchart LR
+    A["3 portals requested"] --> B{"Two are the<br/>same product?"}
+    B -->|"build sequentially"| C["~6 months"]:::slow
+    B -->|"parent + reuse base"| D["~4 months"]:::fast
+    classDef slow fill:#fde7e9,stroke:#d1242f,color:#5c0011;
+    classDef fast fill:#e6f4ea,stroke:#1a7f37,color:#0b3d1f;
+```
+
+![Key decision — parent/child parallel build](docs/screens/02-decision.png)
 
 ## 2 · The finances
 
@@ -34,6 +47,8 @@ A platform carrying a **$100M+ risk portfolio** — bank billing, settlement, an
 
 Fewer defects, faster cycles, and a −50% manual-work cut translate straight into more bound policies and lower cost-to-serve on a high-value book.
 
+![Outcomes — before / after metrics](docs/screens/04-outcomes.png)
+
 ## 3 · The tablet — the signature screen
 
 The case study's hero is a **live, AI-built onboarding hub rendered as an iPad** — bezel, camera, status bar, glass UI — embedded right in the page, not a screenshot.
@@ -41,6 +56,8 @@ The case study's hero is a **live, AI-built onboarding hub rendered as an iPad**
 - It was **one of the first features shipped**: the self-serve ramp guide that took new hires from weeks to **~3 days to first PR**.
 - Sectioned, icon-based, tap-through: start-here, knowledge base, RACI matrix, stack, environments, 30·60·90 ramp, rituals, team, glossary.
 - Doubles as the visual centerpiece of the whole case study — a real product surface you can touch, mid-narrative.
+
+![Onboarding hub rendered as an iPad](docs/screens/05-tablet.png)
 
 ---
 
@@ -134,6 +151,20 @@ public/
 ## Architecture in one paragraph
 
 The platform is a .NET API service as the hub, with focused containers for document generation, billing, and reporting — all on Kubernetes. The **Admin & Security** container is deliberately isolated: every API request authorizes against it, and it owns its own security schema. Managing access *per environment* without touching the full database means a far smaller blast radius. See [`Architecture-Appendix-C4.md`](./Architecture-Appendix-C4.md) and [`structurizr/workspace.dsl`](./structurizr/workspace.dsl).
+
+```mermaid
+flowchart TB
+    RU["Underwriter / broker"] --> SYS
+    PA["Portal admin"] --> SYS
+    SA["Super admin"] --> SYS
+    SYS["<b>Underwriting Portal Platform</b><br/>risk submission → bound policy<br/>documents · billing · reporting"]
+    SYS -->|"billing and settlement"| BANK["Bank / billing provider"]
+    LEG["Legacy system"] -.->|"one-way migration"| SYS
+    classDef sys fill:#16365C,stroke:#0F2742,color:#fff;
+    class SYS sys;
+```
+
+![C4 architecture — three zoom levels in-page](docs/screens/03-architecture.png)
 
 ## Resources
 
